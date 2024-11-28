@@ -1,0 +1,136 @@
+body {
+    background-color: black;
+}
+
+
+.fix-border {
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-bottom-left-radius: var(--bs-border-radius);
+    border-bottom-right-radius: var(--bs-border-radius);
+}
+
+.gray-color {
+    background-color: #141314;
+}
+
+.main-container {
+    min-height: 600px;
+}
+
+
+.nav-link.active {
+    color: #ffe9aa !important;
+}
+
+.nav-tabs {
+    max-height: 65px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex !important;
+    flex-wrap: unset;
+    flex-direction: row;
+}
+
+.main-title {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.main-describe {
+    max-width: 600px;
+    margin: 0;
+}
+
+.main-bug {
+    filter: invert();
+    width: 100px;
+    height: 100px;
+}
+
+/* Элемент для вращения */
+.rotating {
+    width: 100px;
+    height: 100px;
+    animation: spin 3s ease-in-out infinite;
+}
+
+/* Определение анимации */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.bug-container {
+    width: fit-content;
+    user-select: none;
+}
+
+.analyse {
+    background-color: white;
+    height: 10px;
+    color: red;
+}
+
+.fw-bolder {
+    padding: 2px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+
+svg {
+    display: inline-block; /* Для выравнивания по тексту */
+    font-size: 37px; /* Размер шрифта SVG должен соответствовать основному тексту */
+    width: 140px;
+    height: fit-content; /* Автоматическая высота для пропорций */
+    margin: 0 6px; /* Отступы вокруг SVG */
+    vertical-align: middle; /* Вертикальное выравнивание SVG с текстом */
+}
+
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 9% 4%;
+    stroke-width: 0.5px;
+    stroke-dashoffset: 0;
+    animation: stroke-offset 3s infinite linear;
+}
+
+.text-copy:nth-child(1) {
+    stroke: #4D163D;
+    animation-delay: -1s;
+}
+
+.text-copy:nth-child(2) {
+    stroke: #840037;
+    animation-delay: -2s;
+}
+
+.text-copy:nth-child(3) {
+    stroke: #BD0034;
+    animation-delay: -3s;
+}
+
+.text-copy:nth-child(4) {
+    stroke: #BD0034;
+    animation-delay: -4s;
+}
+
+.text-copy:nth-child(5) {
+    stroke: #FDB731;
+    animation-delay: -5s;
+}
+
+@keyframes stroke-offset {
+    100% {
+        stroke-dashoffset: -35%;
+    }
+}

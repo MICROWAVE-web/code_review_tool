@@ -1,0 +1,135 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODE REVIEWER TOOL</title>
+    <link rel="icon" href="{% static 'main/img/icon_small.png' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/darcula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+</head>
+<body data-bs-theme="dark">
+<div class="container mt-4 p-5 gray-color rounded ">
+    <h1 class="text-white m-auto main-title fw-lighter">
+        Мастер загрузки и 
+        <svg viewBox="0 0 140 34" xmlns="http://www.w3.org/2000/svg">
+            <symbol id="s-text">
+                <text 
+                    text-anchor="middle" 
+                    dominant-baseline="middle" 
+                    x="50%" 
+                    y="70%"
+                >
+                    анализа
+                </text>
+            </symbol>
+
+            <g class="g-ants">
+                <use xlink:href="#s-text" class="text-copy"></use>
+                <use xlink:href="#s-text" class="text-copy"></use>
+                <use xlink:href="#s-text" class="text-copy"></use>
+                <use xlink:href="#s-text" class="text-copy"></use>
+                <use xlink:href="#s-text" class="text-copy"></use>
+            </g>
+        </svg>
+        кода
+    </h1>
+    <br>
+    <p class="text-secondary main-describe m-auto">
+        Часто, в крупных компаниях для разработки элементов различных систем привлекаются как разработчики, так и
+        подрядные организации. Такое большое количество людей, приводит к существенному
+        увеличению количества времени, затрачиваемого на проверку и корректировку создаваемых merge requests.
+        <br><br>
+        Используйте этот инструмент для загрузки вашего кода в удобном формате. Вы можете вставить текст вручную,
+        загрузить файл или архив,
+        а также указать ссылку на GitHub. Мы сделаем всё остальное!
+    </p>
+    <br>
+    <div class="m-auto bug-container mt-3">
+        <img src="{% static 'main/img/bug.png' %}" alt="" class="m-auto main-bug rotating">
+    </div>
+</div>
+<div class="container mt-4 p-5 gray-color main-container rounded">
+    <h2 class="mb-4 text-warning fw-bolder">Выбери удобный способ передачи кода:</h2>
+
+    <!-- Навигация для вкладок -->
+    <ul class="nav nav-tabs" id="formTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="text-warning nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text" type="button" role="tab" aria-controls="text" aria-selected="true">Вставить текст</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="text-warning nav-link" id="file-tab" data-bs-toggle="tab" data-bs-target="#file" type="button" role="tab" aria-controls="file" aria-selected="false">Загрузить файл</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="text-warning nav-link" id="archive-tab" data-bs-toggle="tab" data-bs-target="#archive" type="button" role="tab" aria-controls="archive" aria-selected="false">Загрузить архив</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="text-warning nav-link" id="github-tab" data-bs-toggle="tab" data-bs-target="#github" type="button" role="tab" aria-controls="github" aria-selected="false">GitHub репозиторий</button>
+        </li>
+    </ul>
+
+    <!-- Содержимое вкладок -->
+    <div class="tab-content fix-border p-4">
+        <!-- Вкладка с текстовым вводом -->
+        <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.code_text|as_crispy_field }}
+                </div>
+                <button type="submit" class="btn btn-danger">Отправить</button>
+            </form>
+        </div>
+
+        <!-- Вкладка с загрузкой файла -->
+        <div class="tab-pane fade" id="file" role="tabpanel" aria-labelledby="file-tab">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.code_file|as_crispy_field }}
+                    {% if form.code_file.errors %}
+                        <div class="text-danger">{{ form.code_file.errors }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-danger">Отправить</button>
+            </form>
+        </div>
+
+        <!-- Вкладка с загрузкой архива -->
+        <div class="tab-pane fade" id="archive" role="tabpanel" aria-labelledby="archive-tab">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.code_archive|as_crispy_field }}
+                    {% if form.code_archive.errors %}
+                        <div class="text-danger">{{ form.code_archive.errors }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-danger">Отправить</button>
+            </form>
+        </div>
+
+        <!-- Вкладка с ссылкой на GitHub -->
+        <div class="tab-pane fade" id="github" role="tabpanel" aria-labelledby="github-tab">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.github_link|as_crispy_field }}
+                </div>
+                <button type="submit" class="btn btn-danger">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="{% static 'main/js/codemirror.js' %}"></script>
+</body>
+</html>
