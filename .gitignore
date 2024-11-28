@@ -1,3 +1,4 @@
 /.env
 /code_review/migrations/
 /db.sqlite3
+/reports/
