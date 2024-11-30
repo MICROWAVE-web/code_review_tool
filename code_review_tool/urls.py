@@ -23,7 +23,7 @@ from code_review.views import main_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main_view, name='main_view'),
+    path('hakaton/', main_view, name='main_view'),
 ]
 
 if settings.DEBUG:
