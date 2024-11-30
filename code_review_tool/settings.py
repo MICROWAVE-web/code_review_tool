@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://maptap.ru',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,12 +44,14 @@ INSTALLED_APPS = [
     'code_review',
     'crispy_forms',  # Добавляем библиотеку crispy_forms
     "crispy_bootstrap5",  # Добавляем библиотеку crispy_forms
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
