@@ -4,6 +4,7 @@ import io
 import json
 import os
 import tempfile
+import traceback
 import zipfile
 from datetime import datetime
 from io import BytesIO
@@ -216,6 +217,7 @@ def main_view(request):
                         "file_content": base64_file,
                     })
             except Exception as e:
+                traceback.print_exc()
                 return JsonResponse({
                     "message": f"Произошла ошибка: {e}",
                     "status": "error",
