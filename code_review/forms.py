@@ -12,7 +12,6 @@ def validate_file_extension(value):
 
 def validate_zip_extension(value):
     ext = value.name.split('.')[-1].lower()
-    print(f".{ext}")
     if f".{ext}" not in ['.zip']:
         raise ValidationError(u'Неправильный формат файла')
 

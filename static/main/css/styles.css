@@ -1,5 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
 body {
     background-color: black;
+    font-family: 'GTEestiProText', Arial, sans-serif;
 }
 
 
@@ -14,7 +17,7 @@ body {
 }
 
 .main-container {
-    min-height: 600px;
+    height: fit-content;
 }
 
 
@@ -83,49 +86,47 @@ body {
     padding: 2px;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
-
 
 svg {
-    display: inline-block; /* Для выравнивания по тексту */
-    font-size: 37px; /* Размер шрифта SVG должен соответствовать основному тексту */
+    display: inline-block;
+    font-size: 37px;
     width: 140px;
-    height: fit-content; /* Автоматическая высота для пропорций */
-    margin: 0 6px; /* Отступы вокруг SVG */
-    vertical-align: middle; /* Вертикальное выравнивание SVG с текстом */
+    height: fit-content;
+    margin: 0 6px;
+    vertical-align: middle;
 }
 
 .text-copy {
     fill: none;
     stroke: white;
-    stroke-dasharray: 9% 4%;
-    stroke-width: 0.5px;
+    stroke-dasharray: 9% 2%;
+    stroke-width: .4px;
     stroke-dashoffset: 0;
     animation: stroke-offset 3s infinite linear;
 }
 
 .text-copy:nth-child(1) {
-    stroke: #4D163D;
+    stroke: #ff0000;
     animation-delay: -1s;
 }
 
 .text-copy:nth-child(2) {
-    stroke: #840037;
+    stroke: #ff0000;
     animation-delay: -2s;
 }
 
 .text-copy:nth-child(3) {
-    stroke: #BD0034;
+    stroke: #ff0000;
     animation-delay: -3s;
 }
 
 .text-copy:nth-child(4) {
-    stroke: #BD0034;
+    stroke: #ffffff;
     animation-delay: -4s;
 }
 
 .text-copy:nth-child(5) {
-    stroke: #FDB731;
+    stroke: #ffffff;
     animation-delay: -5s;
 }
 
@@ -133,4 +134,8 @@ svg {
     100% {
         stroke-dashoffset: -35%;
     }
+}
+
+.main-logo {
+    width: 300px;
 }

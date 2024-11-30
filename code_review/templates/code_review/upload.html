@@ -1,12 +1,11 @@
+{% load crispy_forms_filters %}
 {% load static %}
-{% load crispy_forms_tags %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CODE REVIEWER TOOL</title>
+    <title>Code Reviewer Tool</title>
     <link rel="icon" href="{% static 'main/img/icon_small.png' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -16,26 +15,33 @@
 </head>
 <body data-bs-theme="dark">
 <div class="container mt-4 p-5 gray-color rounded ">
+    <div class="bug-container mt-3">
+        <img src="{% static 'main/img/logo.png' %}" alt="" class="m-auto main-logo">
+        <br><br>
+        <span class="text-secondary">Code Reviewer Tool</span>
+    </div>
+</div>
+<div class="container mt-4 p-5 gray-color rounded ">
     <h1 class="text-white m-auto main-title fw-lighter">
-        Мастер загрузки и 
+        Мастер загрузки и
         <svg viewBox="0 0 140 34" xmlns="http://www.w3.org/2000/svg">
             <symbol id="s-text">
-                <text 
-                    text-anchor="middle" 
-                    dominant-baseline="middle" 
-                    x="50%" 
-                    y="70%"
+                <text
+                        text-anchor="middle"
+                        dominant-baseline="middle"
+                        x="50%"
+                        y="57%"
                 >
                     анализа
                 </text>
             </symbol>
 
             <g class="g-ants">
-                <use xlink:href="#s-text" class="text-copy"></use>
-                <use xlink:href="#s-text" class="text-copy"></use>
-                <use xlink:href="#s-text" class="text-copy"></use>
-                <use xlink:href="#s-text" class="text-copy"></use>
-                <use xlink:href="#s-text" class="text-copy"></use>
+                <use href="#s-text" class="text-copy"></use>
+                <use href="#s-text" class="text-copy"></use>
+                <use href="#s-text" class="text-copy"></use>
+                <use href="#s-text" class="text-copy"></use>
+                <use href="#s-text" class="text-copy"></use>
             </g>
         </svg>
         кода
@@ -51,26 +57,34 @@
         а также указать ссылку на GitHub. Мы сделаем всё остальное!
     </p>
     <br>
-    <div class="m-auto bug-container mt-3">
+    <div class="m-auto bug-container mt-3 d-none">
         <img src="{% static 'main/img/bug.png' %}" alt="" class="m-auto main-bug rotating">
     </div>
 </div>
-<div class="container mt-4 p-5 gray-color main-container rounded">
+<div class="container mt-4 mb-5 p-5 gray-color main-container rounded">
     <h2 class="mb-4 text-warning fw-bolder">Выбери удобный способ передачи кода:</h2>
 
     <!-- Навигация для вкладок -->
     <ul class="nav nav-tabs" id="formTabs" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="text-warning nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text" type="button" role="tab" aria-controls="text" aria-selected="true">Вставить текст</button>
+            <button class="text-warning nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text"
+                    type="button" role="tab" aria-controls="text" aria-selected="true">Вставить код
+            </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="text-warning nav-link" id="file-tab" data-bs-toggle="tab" data-bs-target="#file" type="button" role="tab" aria-controls="file" aria-selected="false">Загрузить файл</button>
+            <button class="text-warning nav-link" id="file-tab" data-bs-toggle="tab" data-bs-target="#file"
+                    type="button" role="tab" aria-controls="file" aria-selected="false">Загрузить файл
+            </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="text-warning nav-link" id="archive-tab" data-bs-toggle="tab" data-bs-target="#archive" type="button" role="tab" aria-controls="archive" aria-selected="false">Загрузить архив</button>
+            <button class="text-warning nav-link" id="archive-tab" data-bs-toggle="tab" data-bs-target="#archive"
+                    type="button" role="tab" aria-controls="archive" aria-selected="false">Загрузить .zip архив
+            </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="text-warning nav-link" id="github-tab" data-bs-toggle="tab" data-bs-target="#github" type="button" role="tab" aria-controls="github" aria-selected="false">GitHub репозиторий</button>
+            <button class="text-warning nav-link" id="github-tab" data-bs-toggle="tab" data-bs-target="#github"
+                    type="button" role="tab" aria-controls="github" aria-selected="false">GitHub репозиторий
+            </button>
         </li>
     </ul>
 
@@ -78,18 +92,19 @@
     <div class="tab-content fix-border p-4">
         <!-- Вкладка с текстовым вводом -->
         <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab">
-            <form method="post" enctype="multipart/form-data" novalidate>
+            <form id="formText" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
                 <div class="mb-3">
                     {{ form.code_text|as_crispy_field }}
                 </div>
-                <button type="submit" class="btn btn-danger">Отправить</button>
+                <button type="button" class="btn btn-danger show-toast" onclick="submitForm('formText')">Отправить
+                </button>
             </form>
         </div>
 
         <!-- Вкладка с загрузкой файла -->
         <div class="tab-pane fade" id="file" role="tabpanel" aria-labelledby="file-tab">
-            <form method="post" enctype="multipart/form-data" novalidate>
+            <form id="formFile" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
                 <div class="mb-3">
                     {{ form.code_file|as_crispy_field }}
@@ -97,13 +112,14 @@
                         <div class="text-danger">{{ form.code_file.errors }}</div>
                     {% endif %}
                 </div>
-                <button type="submit" class="btn btn-danger">Отправить</button>
+                <button type="button" class="btn btn-danger show-toast" onclick="submitForm('formFile')">Отправить
+                </button>
             </form>
         </div>
 
         <!-- Вкладка с загрузкой архива -->
         <div class="tab-pane fade" id="archive" role="tabpanel" aria-labelledby="archive-tab">
-            <form method="post" enctype="multipart/form-data" novalidate>
+            <form id="formArchive" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
                 <div class="mb-3">
                     {{ form.code_archive|as_crispy_field }}
@@ -111,25 +127,47 @@
                         <div class="text-danger">{{ form.code_archive.errors }}</div>
                     {% endif %}
                 </div>
-                <button type="submit" class="btn btn-danger">Отправить</button>
+                <button type="button" class="btn btn-danger show-toast" onclick="submitForm('formArchive')">Отправить
+                </button>
             </form>
         </div>
 
         <!-- Вкладка с ссылкой на GitHub -->
         <div class="tab-pane fade" id="github" role="tabpanel" aria-labelledby="github-tab">
-            <form method="post" enctype="multipart/form-data" novalidate>
+            <form id="formGithub" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
                 <div class="mb-3">
                     {{ form.github_link|as_crispy_field }}
                 </div>
-                <button type="submit" class="btn btn-danger">Отправить</button>
+                <button type="button" class="btn btn-danger show-toast" onclick="submitForm('formGithub')">Отправить
+                </button>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Toast для уведомлений -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050">
+    <div id="loadingToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive"
+         aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                Загрузка...
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 <script src="{% static 'main/js/codemirror.js' %}"></script>
+<script src="{% static 'main/js/toast.js' %}"></script>
+<script src="{% static 'main/js/ajax_script.js' %}"></script>
+
 </body>
 </html>
