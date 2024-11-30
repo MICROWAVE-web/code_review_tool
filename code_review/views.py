@@ -5,12 +5,13 @@ import json
 import os
 import tempfile
 import zipfile
+from datetime import datetime
 from io import BytesIO
 
 import git
 import markdown_pdf
 import requests
-from django.http import HttpRequest, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 
 from code_review_tool import settings
@@ -23,6 +24,7 @@ API_URL = "http://84.201.152.196:8020/v1/completions"
 API_KEY = settings.CODE_REVIEW_API_KEY
 
 
+# Функция анализа кода
 def analyze_code(code_text):
     """
     Отправляет текст кода в Mistral-Nemo-Instruct для анализа.
@@ -61,6 +63,7 @@ def analyze_code(code_text):
         return token_warning, f"Ошибка при подключении к серверу: {e}"
 
 
+# Функция создания .pdf файла
 def generate_pdf_report(markdown_text, output_path="report.pdf"):
     """
     Генерация PDF из текста в формате Markdown с использованием markdown-pdf.
@@ -82,6 +85,7 @@ def generate_pdf_report(markdown_text, output_path="report.pdf"):
     return pdf.out_file.getvalue()
 
 
+# Функция обработки .zip архива
 def process_archive(archive_file, allowed_extensions=None):
     """
     Обработка архива: чтение содержимого файлов с определенными расширениями.
@@ -152,10 +156,17 @@ def process_github_repo(github_link):
         return f"Общая ошибка: {str(e)}"
 
 
+# Функция главной страницы
 def main_view(request):
     if request.method == "POST":
         form = CodeUploadForm(request.POST, request.FILES)
         if form.is_valid():
+
+            # Получить текущую дату
+            current_date = datetime.now()
+
+            # Сформировать строку с нужным форматом
+            file_name = f"Анализ_от_{current_date.strftime('%d_%m_%Y')}.pdf"
             try:
                 code_text = form.cleaned_data['code_text']
                 code_file = form.cleaned_data['code_file']
@@ -215,7 +226,3 @@ def main_view(request):
     else:
         form = CodeUploadForm()
         return render(request, 'code_review/upload.html', {'form': form})
-
-
-def result_view(request: HttpRequest):
-    return render(request, 'code_review/result.html', )
