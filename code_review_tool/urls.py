@@ -19,12 +19,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from code_review.views import main_view, result_view
+from code_review.views import main_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_view, name='main_view'),
-    path('result', result_view, name='result_view'),
 ]
 
 if settings.DEBUG:
