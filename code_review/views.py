@@ -204,7 +204,7 @@ def main_view(request):
                     return JsonResponse({
                         "message": "Отчет успешно создан!",
                         "status": "success",
-                        "file_name": "report.pdf",
+                        "file_name": file_name,
                         "file_content": base64_file,
                     })
                 else:
@@ -212,14 +212,14 @@ def main_view(request):
                         "message": "Внимание! Код, предложенный для анализа слишком большой поэтому ответ может быть "
                                    "неполным ",
                         "status": "warning",
-                        "file_name": "report.pdf",
+                        "file_name": file_name,
                         "file_content": base64_file,
                     })
             except Exception as e:
                 return JsonResponse({
                     "message": f"Произошла ошибка: {e}",
                     "status": "error",
-                    "file_name": "report.pdf",
+                    "file_name": file_name,
                 })
         else:
             return JsonResponse({'message': 'Ошибка', 'errors': form.errors}, status=400)
