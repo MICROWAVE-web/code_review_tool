@@ -15,9 +15,10 @@ function submitForm(formId) {
     })
         .then(response => {
             if (!response.ok) {
-                showToast('Ошибка при загрузке данных.', 'error');
-                throw new Error('Ошибка при отправке данных.');
+                console.log(response);
+                showToast(response.message, 'error');
             }
+            console.log(response);
             return response.json(); // Получаем JSON
         })
         .then(data => {
@@ -27,6 +28,7 @@ function submitForm(formId) {
             } else if (data.status === 'warning') {
                 showToast(data.message, 'warning');
             } else if (data.status === 'error') {
+                console.log(data)
                 showToast(data.message, 'error');
                 return
             }
@@ -51,7 +53,7 @@ function submitForm(formId) {
         })
         .catch(error => {
             // Обработка ошибок, отображаем сообщение об ошибке в Toast
-            showToast(data.message, 'error');
+            showToast("Неизвестная ошибка", 'error');
             console.error(error);
         });
 }

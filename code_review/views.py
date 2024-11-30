@@ -224,7 +224,8 @@ def main_view(request):
                     "file_name": file_name,
                 })
         else:
-            return JsonResponse({'message': 'Ошибка', 'errors': form.errors}, status=400)
+            error_string = ' '.join([' '.join(x for x in l) for l in list(form.errors.values())])
+            return JsonResponse({'message': f'Ошибка: {error_string}', "status": "error"})
     else:
         form = CodeUploadForm()
         return render(request, 'code_review/upload.html', {'form': form})
