@@ -51,8 +51,7 @@ function submitForm(formId) {
         })
         .catch(error => {
             // Обработка ошибок, отображаем сообщение об ошибке в Toast
-            toastBody.textContent = 'Произошла ошибка. Попробуйте снова.';
-            toast.show();
+            showToast(data.message, 'error');
             console.error(error);
         });
 }
