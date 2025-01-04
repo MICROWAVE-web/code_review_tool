@@ -1,41 +1,41 @@
-# Инструмент Анализа Кода
+# Code Analysis Tool
 
-## Описание
-Веб-приложение для автоматизированного анализа программного кода, разработанное для оптимизации процесса code review в крупных компаниях.
+## Description
+A web application for automated program code analysis, designed to optimize the code review process in large companies.
 
-## Возможности
-- Загрузка кода через текстовое поле
-- Загрузка отдельных файлов с кодом
-- Загрузка архивов с кодом
-- Поддержка ссылок на GitHub репозитории
-- Генерация PDF-отчета с анализом кода
+## Features
+- Upload code through a text field
+- Upload individual code files
+- Upload code archives
+- Support for GitHub repository links
+- Generate PDF reports with code analysis
 
-## Установка
-1. Клонируйте репозиторий
-2. Создайте виртуальное окружение
+## Installation
+1. Clone the repository  
+2. Create a virtual environment  
 ```bash
 python -m venv venv
-source venv/bin/activate  # Для Linux/Mac
-venv\Scripts\activate     # Для Windows
+source venv/bin/activate  # For Linux/Mac
+venv\Scripts\activate     # For Windows
 ```
 
-3. Установите зависимости
+3. Install dependencies  
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Запустите миграции
+4. Run migrations  
 ```bash
 python manage.py migrate
 ```
 
-5. Запустите сервер
+5. Start the server  
 ```bash
 python manage.py runserver
 ```
 
-## Технологии
-- Django
-- Markdown
-- ReportLab
-- PyGithub
+## Technologies
+- Django  
+- Markdown  
+- ReportLab  
+- PyGithub  
