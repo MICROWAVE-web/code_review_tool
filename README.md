@@ -1,7 +1,10 @@
 # Code Analysis Tool
+![image](https://github.com/user-attachments/assets/977380d1-cec5-4763-ae26-e09665009880)
 
 ## Description
 A web application for automated program code analysis, designed to optimize the code review process in large companies.
+
+![image](https://github.com/user-attachments/assets/ac4cf7ea-0035-44d9-8b9b-86220d59bbc8)
 
 ## Features
 - Upload code through a text field
